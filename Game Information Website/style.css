@@ -1,0 +1,185 @@
+/* button {
+    background-color: rgb(241, 244, 239);
+    border-spacing: 3px 3px 3px;
+    size: 14px;
+    color: rgb(216, 202, 13);
+    transition-duration: 0.20s;
+    height: 30px;
+    width: 50px;
+    border-radius: 18px;
+    border-color: pink;
+    box-shadow: 5px 3px 4px black;
+}
+
+button:hover {
+    background-color: red;
+    opacity: 0.3;
+    border-color: blue;
+}
+
+button:active {
+    background-color: blue;
+    border-color: red;
+} */
+
+header {
+    background-color: rgb(199, 191, 191);
+    visibility: visible;
+    border-radius: 1em;
+    height: 70px;
+    width: 1640px;
+}
+
+h1 {
+    color: red;
+    font-style: italic;
+
+}
+
+body {
+    background-color: black;
+    color: white;
+    background-image: url(Acer_Wallpaper_03_3840x2400.jpg);
+    background-attachment: scroll;
+}
+
+table {
+    border-collapse: collapse;
+    padding: 0;
+    margin: 0;
+    table-layout: fixed;
+    border-style: double;
+    border-spacing: 0;
+    min-width: 90em;
+    font-size: large;
+}
+
+td,
+th {
+    padding: 0;
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.2;
+    text-align: center;
+}
+
+img {
+    white-space: nowrap;
+    width: 210px;
+    height: 270px;
+}
+
+#name {
+    color: aqua;
+    width: 100px;
+    font-weight: bold;
+}
+
+#det {
+    width: 100px;
+    color: greenyellow;
+}
+
+#desc {
+    column-fill: auto;
+    text-align: start;
+}
+
+#black {
+    color: yellow;
+}
+
+
+#aqua {
+    color: darkorange;
+    background-color: lightblue;
+}
+
+#icons {
+    text-align: center;
+    font-size: larger;
+    margin-right: 20px;
+}
+
+i:hover {
+    color: lightgrey;
+}
+
+.dropdown button {
+    background-color: rgb(21, 239, 21);
+    padding: 6px 15px;
+    cursor: pointer;
+}
+
+.dropdown a {
+    display: block;
+    color: red;
+    background-color: black;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 6px 15px;
+}
+
+.dropdown .content {
+    display: none;
+    position: absolute;
+    min-width: 100px;
+    cursor: pointer;
+    box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.505);
+}
+
+.dropdown:hover .content {
+    display: inline;
+    cursor: pointer;
+}
+
+.dropdown:hover .button {
+    background-color: rgba(21, 239, 21, 0.24);
+}
+
+.pagination {
+    text-align: center;
+}
+
+#links {
+    color: greenyellow;
+}
+
+#links:hover {
+    color: red;
+}
+
+a:hover {
+    color: blue;
+}
+
+.pagination a {
+    color: rgba(221, 27, 198, 0.795);
+    text-decoration: none;
+    display: inline-block;
+    padding: 3px 3px;
+    font-size: x-large;
+}
+
+.pagination a.active {
+    background-color: greenyellow;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: x-large;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: rgb(185, 178, 178);
+}
+
+footer {
+    background-color: plum;
+    border-radius: 1em;
+    height: 110px;
+    width: 1640px;
+}
+
+#lefts {
+    color: blue;
+    text-align: center;
+}

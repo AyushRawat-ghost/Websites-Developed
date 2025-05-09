@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            background: rgba(20, 20, 20, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            width: 400px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            text-align: center;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+        }
+
+        .input-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        #task-input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            background-color: #1a1a1a;
+            color: #00ffff;
+            margin-right: 10px;
+        }
+
+        #add-task-btn {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #00ffff;
+            color: #0a0a0a;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #add-task-btn:hover {
+            background-color: #008080;
+        }
+
+        #task-list {
+            list-style: none;
+        }
+
+        .task-item {
+            background-color: #1a1a1a;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 0 5px rgba(0, 255, 255, 0.2);
+            animation: fadeIn 0.5s ease-in-out;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .edit-btn,
+        .complete-btn,
+        .delete-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .edit-btn {
+            color: #00bfff;
+        }
+
+        .complete-btn {
+            color: #32cd32;
+        }
+
+        .delete-btn {
+            color: #ff4040;
+        }
+
+        .edit-btn:hover {
+            color: #1e90ff;
+        }
+
+        .complete-btn:hover {
+            color: #228b22;
+        }
+
+        .delete-btn:hover {
+            color: #ff6347;
+        }
+
+        .task-item.completed {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #e0e0e0;
+            color: #0a0a0a;
+        }
+
+        body.dark-mode .container {
+            background: rgba(230, 230, 230, 0.9);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        body.dark-mode h1 {
+            color: #00aaaa;
+        }
+
+        body.dark-mode #task-input {
+            background-color: #f0f0f0;
+            color: #00aaaa;
+        }
+
+        body.dark-mode #add-task-btn {
+            background-color: #00aaaa;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .task-item {
+            background-color: #f0f0f0;
+            color: #0a0a0a;
+        }
+
+        /* Battle Theme */
+        body.battle-theme {
+            background-color: #2f2f2f;
+            color: #ffdd00;
+        }
+
+        body.battle-theme .container {
+            background: rgba(50, 50, 50, 0.9);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+        }
+
+        body.battle-theme h1 {
+            color: #ff4500;
+            text-shadow: 0 0 10px #ff4500;
+        }
+
+        body.battle-theme #task-input {
+            background-color: #333;
+            color: #ff4500;
+        }
+
+        body.battle-theme #add-task-btn {
+            background-color: #ff4500;
+            color: #fff;
+        }
+
+        body.battle-theme .task-item {
+            background-color: #444;
+            color: #ffdd00;
+        }
+
+        body.battle-theme .edit-btn {
+            color: #00bfff;
+        }
+
+        body.battle-theme .complete-btn {
+            color: #32cd32;
+        }
+
+        body.battle-theme .delete-btn {
+            color: #ff4040;
+        }
+
+        /* Dark Mode Toggle Button */
+        .dark-mode-toggle,
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #00ffff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dark-mode-toggle:hover,
+        .theme-toggle:hover {
+            background-color: #008080;
+        }
+
+        /* Edit Box Styles */
+        .edit-box {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .edit-input {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #00ffff;
+            background-color: #1a1a1a;
+            color: #00ffff;
+        }
+
+        .save-edit-btn,
+        .cancel-edit-btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .save-edit-btn {
+            background-color: #00ff00;
+            color: #0a0a0a;
+        }
+
+        .cancel-edit-btn {
+            background-color: #ff0000;
+            color: #fff;
+        }
+
+        .save-edit-btn:hover {
+            background-color: #00cc00;
+        }
+
+        .cancel-edit-btn:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <div class="input-container">
+            <input type="text" id="task-input" placeholder="Add a new task..." autocomplete="off">
+            <button id="add-task-btn">Add</button>
+        </div>
+        <ul id="task-list"></ul>
+    </div>
+
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+
+
+    <!-- Include the canvas-confetti library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+    <script>
+        document.getElementById('add-task-btn').addEventListener('click', addTask);
+        document.getElementById('task-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') addTask();
+        });
+        document.addEventListener('DOMContentLoaded', loadTasksFromStorage);
+        function addTask() {
+            const taskInput = document.getElementById('task-input');
+            const taskValue = taskInput.value.trim();
+
+            if (taskValue) {
+                const taskList = document.getElementById('task-list');
+                const taskItem = createTaskElement(taskValue);
+                taskList.appendChild(taskItem);
+                saveTaskToStorage(taskValue);
+                taskInput.value = '';
+            }
+        }
+
+        function createTaskElement(taskValue) {
+            const taskItem = document.createElement('li');
+            taskItem.className = 'task-item';
+
+            taskItem.innerHTML = `
+                <div class="task-content">
+                    <span class="task-text">${taskValue}</span>
+                    <div class="edit-box" style="display: none;">
+                        <input type="text" class="edit-input" value="${taskValue}">
+                        <button class="save-edit-btn">Save</button>
+                        <button class="cancel-edit-btn">Cancel</button>
+                    </div>
+                </div>
+                <div class="task-actions">
+                    <button class="edit-btn">✏</button>
+                    <button class="complete-btn">✔</button>
+                    <button class="delete-btn">✖</button>
+                </div>
+            `;
+
+
+            taskItem.querySelector('.delete-btn').addEventListener('click', function () {
+                removeTask(taskItem, taskValue);
+            });
+
+            taskItem.querySelector('.complete-btn').addEventListener('click', function () {
+                toggleCompleteTask(taskItem);
+            });
+
+            taskItem.querySelector('.edit-btn').addEventListener('click', function () {
+                const editBox = taskItem.querySelector('.edit-box');
+                editBox.style.display = 'block';
+            });
+
+            taskItem.querySelector('.save-edit-btn').addEventListener('click', function () {
+                const editInput = taskItem.querySelector('.edit-input');
+                const newValue = editInput.value.trim();
+                if (newValue) {
+                    updateTaskInStorage(taskValue, newValue);
+                    taskItem.querySelector('.task-text').textContent = newValue;
+                    taskItem.querySelector('.edit-box').style.display = 'none';
+                }
+            });
+
+            taskItem.querySelector('.cancel-edit-btn').addEventListener('click', function () {
+                taskItem.querySelector('.edit-box').style.display = 'none';
+            });
+
+            return taskItem;
+        }
+
+
+        function toggleCompleteTask(taskItem) {
+            taskItem.classList.toggle('completed');
+            if (taskItem.classList.contains('completed')) {
+                celebrate();
+            }
+        }
+
+        function editTask(taskItem) {
+            const taskText = taskItem.querySelector('.task-text');
+            const newValue = prompt('Edit task:', taskText.textContent);
+            if (newValue) {
+                updateTaskInStorage(taskText.textContent, newValue);
+                taskText.textContent = newValue;
+            }
+        }
+
+        function removeTask(taskItem, taskValue) {
+            taskItem.remove();
+            removeTaskFromStorage(taskValue);
+        }
+
+        function saveTaskToStorage(task) {
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks.push(task);
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        function loadTasksFromStorage() {
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks.forEach(task => {
+                const taskList = document.getElementById('task-list');
+                const taskItem = createTaskElement(task);
+                taskList.appendChild(taskItem);
+            });
+        }
+
+        function updateTaskInStorage(oldValue, newValue) {
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            const taskIndex = tasks.indexOf(oldValue);
+            if (taskIndex > -1) {
+                tasks[taskIndex] = newValue;
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+            }
+        }
+
+        function removeTaskFromStorage(taskValue) {
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks = tasks.filter(task => task !== taskValue);
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('battle-theme');
+        }
+
+        // Celebration effect using canvas-confetti
+        function celebrate() {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+    </script>
+</body>
+
+</html>
